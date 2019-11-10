@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <title>错误</title>
+</head>
+<body>
+<nav th:replace="_fragments :: menu(0)"></nav>
+<div>
+    <div th:remove="tag" th:utext="'&lt;!--'"></div>
+    <div th:remove="tag" th:utext="'Failed Request URL :' + ${url}"></div>
+    <div th:remove="tag" th:utext="'Exception message :' + ${exception.message}"></div>
+    <ul th:remove="tag">
+        <li th:each="st : ${exception.stackTrace}" th:remove="tag"><span th:remove="tag" th:utext="${st}"></span></li>
+    </ul>
+    <div th:remove="tag" th:utext="'--&gt;'"></div>
+</div>
+<div class="m-container m-padded-tb-huge">
+    <div class="ui error message">
+        <div class="ui container">
+            <h1>error</h1>
+            <p>出错了</p>
+        </div>
+    </div>
+</div>
+<footer th:replace="_fragments :: footer"></footer>
+</body>
+</html>

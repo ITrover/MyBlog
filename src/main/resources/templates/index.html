@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="_fragments :: head(~{::title})">
+    <meta charset="UTF-8">
+    <meta content="width=device-width , initial-scale=1.0" name="viewport">
+    <title>首页</title>
+    <link href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css" rel="stylesheet">
+    <link href="../static/css/me.css" rel="stylesheet" th:href="@{/css/me.css}">
+</head>
+<body>
+<!--导航-->
+<nav class="ui inverted attached segment m-padded-tb-mini m-shadow-small" th:replace="_fragments :: menu(1)">
+    <div class="ui container">
+        <div class="ui inverted secondary stackable menu">
+            <h2 class="ui teal header item">Blog</h2>
+            <a class="m-item item m-mobile-hide" href="#"><i class="mini home icon"></i>首页</a>
+            <a class="m-item item m-mobile-hide" href="#"><i class="mini idea icon"></i>分类</a>
+            <a class="m-item item m-mobile-hide" href="#"><i class="mini tags icon"></i>标签</a>
+            <a class="m-item item m-mobile-hide" href="#"><i class="mini clone icon"></i>归档</a>
+            <a class="m-item item m-mobile-hide" href="#"><i class="mini info icon"></i>关于我</a>
+            <div class="right m-item item m-mobile-hide">
+                <div class="ui icon inverted transparent input">
+                    <input placeholder="Search...." type="text">
+                    <i class="search link icon"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <a class="ui menu toggle black icon button m-right-top m-mobile-show" href="#">
+        <i class="sidebar icon"></i>
+    </a>
+</nav>
+
+<!--中间内容-->
+<div class="m-container m-padded-tb-large">
+    <div class="ui container">
+        <div class="ui stackable grid">
+            <!--           左边-->
+            <div class="eleven wide column">
+                <!--               header-->
+                <div class="ui top attached segment">
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <h3 class="ui teal header">博客</h3>
+                        </div>
+                        <div class="right aligned column">
+                            共<h3 class="ui orange header m-inline-block m-text-thin">14</h3>页
+                        </div>
+                    </div>
+                </div>
+                <!--               content-->
+                <div class="ui attached  segment">
+                    <div class="ui padded vertical segment m-padded-tb-large">
+                        <!--                       stackable让页面可堆叠，根据页面大小改变布局-->
+                        <!--                       mobile reversed 让布局在手机端反转显示-->
+                        <div class="ui middle aligned mobile reversed stackable grid">
+                            <div class="eleven wide column">
+                                <h3 class="ui header">你整的理解java吗</h3>
+                                <p class="m-text">Lorem Ipsum... but for photos...
+                                    https://picsum.photos/id/870/200/300?grayscale&blur=2 To request multiple images of
+                                    the same size in your browser,.</p>
+                                <div class="ui grid">
+                                    <div class="eleven wide column">
+                                        <div class="ui mini horizontal link list">
+                                            <div class="item">
+                                                <img alt=""
+                                                     class="ui avatar image"
+                                                     src="https://picsum.photos/seed/picsum/100/100?image=1005?image=1005">
+                                                <div class="content"><a class="header" href="#">My name</a></div>
+                                            </div>
+                                            <div class="item">
+                                                <i class="calendar icon"></i>2019-10-31
+                                            </div>
+                                            <div class="item">
+                                                <i class="eye icon"></i>2342
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="right aligned five wide column">
+                                        <a class="ui teal basic label m-padded-tiny m-text-thin" href="#"
+                                           target="_blank"> 认知升级</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="five wide column">
+                                <a href="#" target="_blank">
+                                    <img alt="" class="ui rounded image"
+                                         src="https://picsum.photos/seed/picsum/800/450?image=1005">
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!--               footer-->
+                <div class="ui bottom attached segment">
+                    <div class="ui middle aligned two column grid">
+                        <div class="column">
+                            <a class="ui mini teal basic button" href="#">上一页</a>
+                        </div>
+                        <div class="right aligned column">
+                            <a class="ui mini teal basic button" href="#">下一页</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!--           右边top-->
+            <div class="five wide column">
+                <!--               分类-->
+                <div class="ui segments ">
+                    <div class="ui secondary segment">
+                        <div class="ui two column grid">
+                            <div class="column">
+                                <i class="idea icon"></i>分类
+                            </div>
+                            <div class="right aligned column">
+                                <a href="#" target="_blank">more<i class="angle double right icon "></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui teal segment">
+                        <div class="ui fluid vertical menu">
+                            <a class="item" href="#">
+                                学习日志
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a class="item" href="#">
+                                学习日志
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a class="item" href="#">
+                                学习日志
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a class="item" href="#">
+                                学习日志
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a class="item" href="#">
+                                学习日志
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                            <a class="item" href="#">
+                                学习日志
+                                <div class="ui teal basic left pointing label">13</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <!--标签-->
+                <div class="ui segments m-margin-top-large">
+                    <div class="ui secondary segment">
+                        <div class="ui two column grid">
+                            <div class="column">
+                                <i class="tags icon"></i>标签
+                            </div>
+                            <div class="right aligned column">
+                                <a href="#" target="_blank">more<i class="angle double right icon "></i></a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="ui teal segment">
+                        <a class="ui teal basic left pointing label m-margin-tb-tiny" href="#" target="_blank">方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a class="ui teal basic left pointing label m-margin-tb-tiny" href="#" target="_blank">方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a class="ui teal basic left pointing label  m-margin-tb-tiny" href="#" target="_blank">方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a class="ui teal basic left pointing label m-margin-tb-tiny" href="#" target="_blank">方法论
+                            <div class="detail">23</div>
+                        </a>
+                        <a class="ui teal basic left pointing label m-margin-tb-tiny" href="#" target="_blank">方法论
+                            <div class="detail">23</div>
+                        </a>
+                    </div>
+                </div>
+                <!--最新推荐-->
+                <div class="ui segments m-margin-top-large">
+                    <div class="ui secondary segment ">
+                        <i class="bookmark icon"></i>最新推荐
+                    </div>
+                    <div class="ui segment">
+                        <a class="m-black m-text-thin" href="#" target="_blank">用户故事</a>
+                    </div>
+                    <div class="ui segment">
+                        <a class="m-black m-text-thin" href="#" target="_blank">用户故事</a>
+                    </div>
+                    <div class="ui segment">
+                        <a class="m-black m-text-thin" href="#" target="_blank">用户故事</a>
+                    </div>
+                </div>
+
+                <!--二维码-->
+                <h4 class="ui horizontal divider header m-margin-top-large">扫码关注</h4>
+                <div class="ui centered card" style="width: 10em">
+                    <img alt="" class="ui rounded image" src="./static/image/">
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<!--底部footer-->
+<footer class="ui inverted vertical segment m-padded-tb-massive" th:replace="_fragments :: footer">
+    <div class="ui center aligned container">
+        <div class="ui inverted divided stackable grid">
+            <div class="three wide column">
+                <div class="item">
+                    <img src="./static/images">
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
+                <div class="ui inverted link list">
+                    <a class="item" href="#">用户故事</a>
+                    <a class="item" href="#">用户故事</a>
+                    <a class="item" href="#">用户故事</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
+                <div class="ui inverted link list">
+                    <a class="item" href="#">用户故事</a>
+                    <a class="item" href="#">用户故事</a>
+                    <a class="item" href="#">用户故事</a>
+                </div>
+            </div>
+            <div class="three wide column">
+                <h4 class="ui inverted header m-text-thin m-text-spaced ">Blog</h4>
+                <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客</p>
+            </div>
+        </div>
+        <div class="ui inverted section divider"></div>
+        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright</p>
+    </div>
+</footer>
+
+<!--/*/<th:block th:replace="_fragments :: script">/*/-->
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.2/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+<!--/*/</th:block>/*/-->
+
+<script>
+    $('.menu.toggle').click(function () {
+        // toggleClass切换效果
+        $('.m-item').toggleClass('m-mobile-hide');
+    })
+</script>
+</body>
+</html>
