@@ -62,6 +62,7 @@ public class TagServiceImpl implements TagService {
         return tagRepository.findAllById(convertToList(ids));
     }
 
+    @Transactional
     @Override
     public List<Tag> listTagTop(Integer size) {
         Sort sort = Sort.by(Sort.Direction.DESC, "blogs.size");

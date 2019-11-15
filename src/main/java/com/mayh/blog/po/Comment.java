@@ -23,8 +23,18 @@ public class Comment {
     private List<Comment> replyComments = new ArrayList<>();
     @ManyToOne()
     private Comment parentComment;
-    @ManyToOne
+    @ManyToOne()
     private Blog blog;
+
+    private boolean adminComment;
+
+    public boolean isAdminComment() {
+        return adminComment;
+    }
+
+    public void setAdminComment(boolean adminComment) {
+        this.adminComment = adminComment;
+    }
 
     public Comment() {
     }

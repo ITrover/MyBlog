@@ -19,6 +19,7 @@ public class Blog {
     @Basic(fetch = FetchType.LAZY) //懒加载，只有用的时候加载
     @Lob  //大字段对应longtext
     private String content;
+
     private String firstPicture;
     private String flag;
     private Integer views;
@@ -26,6 +27,7 @@ public class Blog {
     private Boolean shareStatement;
     private Boolean commentable;
     private Boolean published;
+    private String description;
     private Boolean recommend;
     @Temporal(TemporalType.TIMESTAMP)
     private Date createTime;
@@ -33,15 +35,17 @@ public class Blog {
     private Date updateTime;
     @ManyToOne
     private Type type;
+
     //不会进入数据库
     @Transient
     private String tagIds;
     @ManyToOne
     private User user;
+
     @ManyToMany(cascade = {CascadeType.PERSIST})
     private List<Tag> tags = new ArrayList<>();
 
-    @OneToMany(mappedBy = "blog")
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER, mappedBy = "blog")
     private List<Comment> comments = new ArrayList<>();
 
     public Blog() {
@@ -49,6 +53,14 @@ public class Blog {
 
     public Long getId() {
         return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setId(Long id) {
@@ -200,7 +212,7 @@ public class Blog {
     }
 
     private String tagsToIds(List<Tag> tags) {
-        if (!tags.isEmpty()) {
+        if (tags != null && !tags.isEmpty()) {
             StringBuffer ids = new StringBuffer();
             for (Tag tag : tags
             ) {
@@ -227,9 +239,13 @@ public class Blog {
                 ", shareStatement=" + shareStatement +
                 ", commentable=" + commentable +
                 ", published=" + published +
+                ", description='" + description + '\'' +
                 ", recommend=" + recommend +
                 ", createTime=" + createTime +
                 ", updateTime=" + updateTime +
+                ", type=" + type +
+                ", tagIds='" + tagIds + '\'' +
+                ", user=" + user +
                 '}';
     }
 }

@@ -68,6 +68,7 @@ public class TypeServiceImpl implements TypeService {
         typeRepository.deleteById(id);
     }
 
+    @Transactional
     @Override
     public List<Type> listType() {
         return typeRepository.findAll();

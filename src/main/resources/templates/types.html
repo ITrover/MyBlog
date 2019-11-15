@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta content="width=device-width , initial-scale=1.0" name="viewport">
@@ -39,74 +39,87 @@
         <div class="ui top attached segment">
             <div class="ui middle aligned two column grid">
                 <div class="column">
-                    <h3 class="ui teal header">博客</h3>
+                    <h3 class="ui teal header">分类</h3>
                 </div>
                 <div class="right aligned column">
-                    共<h3 class="ui orange header m-inline-block m-text-thin">14</h3>个
+                    共<h3 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(types)}">14</h3>个
                 </div>
             </div>
         </div>
         <div class="ui attached segment m-padded-tb-large">
-            <div class="ui labeled button m-margin-tb-tiny">
-                <a class="ui basic teal button" href="#">思考感悟</a>
-                <div class="ui basic teal left pointing label">24</div>
+            <div class="ui labeled button m-margin-tb-tiny" th:each="type : ${types}">
+                <a class="ui basic  button" href="#" th:classappend="${type.id==activeTypeId} ? 'teal'"
+                   th:href="@{/types/{id}(id=${type.id})}" th:text="${type.name}">思考感悟</a>
+                <div class="ui basic  left pointing label" th:classappend="${type.id==activeTypeId} ? 'teal'"
+                     th:href="@{/types/{id}(id=${type.id})}" th:text="${#arrays.length(type.blogs)}">24
+                </div>
             </div>
+            <!--/*-->
             <div class="ui labeled button m-margin-tb-tiny">
                 <a class="ui basic  button" href="#">思考感悟</a>
                 <div class="ui basic  left pointing label">24</div>
             </div>
+            <!--/*-->
         </div>
         <!--            content-->
         <div class="ui top attached teal segment">
-            <div class="ui padded vertical segment m-padded-tb-large m-mobile-lr-clear">
+            <div class="ui padded vertical segment m-padded-tb-large" th:each="blog : ${page.content}">
                 <!--                       stackable让页面可堆叠，根据页面大小改变布局-->
                 <!--                       mobile reversed 让布局在手机端反转显示-->
-                <div class="ui mobile reversed stackable grid">
+                <div class="ui middle aligned mobile reversed stackable grid">
                     <div class="eleven wide column">
-                        <h3 class="ui header">你整的理解java吗</h3>
-                        <p class="m-text">Lorem Ipsum... but for photos...
+                        <h3 class="ui header"><a class="m-black" href="#" target="_blank"
+                                                 th:href="@{/blog/{id}(id=${blog.id})}" th:text="${blog.title}">你整的理解java吗</a>
+                        </h3>
+                        <p class="m-text" th:text="|${blog.description}......|">Lorem Ipsum... but for photos...
                             https://picsum.photos/id/870/200/300?grayscale&blur=2 To request multiple images of
                             the same size in your browser,.</p>
-                        <div class="ui stackable grid">
+                        <div class="ui grid">
                             <div class="eleven wide column">
                                 <div class="ui mini horizontal link list">
                                     <div class="item">
                                         <img alt=""
                                              class="ui avatar image"
-                                             src="https://picsum.photos/seed/picsum/100/100?image=1005?image=1005">
-                                        <div class="content"><a class="header" href="#">My name</a></div>
+                                             src="https://picsum.photos/seed/picsum/100/100?image=1005?image=1005"
+                                             th:src="@{${blog.user.avatar}}">
+                                        <div class="content"><a class="header" href="#" th:text="${blog.user.nickname}">My
+                                            name</a></div>
                                     </div>
                                     <div class="item">
-                                        <i class="calendar icon"></i>2019-10-31
+                                        <i class="calendar icon"></i><span
+                                            th:text="${#dates.format(blog.updateTime,'yyyy-MM-dd')}">2019-10-31</span>
                                     </div>
                                     <div class="item">
-                                        <i class="eye icon"></i>2342
+                                        <i class="eye icon"></i><span th:text="${blog.views}">2342</span>
                                     </div>
                                 </div>
                             </div>
                             <div class="right aligned five wide column">
                                 <a class="ui teal basic label m-padded-tiny m-text-thin" href="#"
-                                   target="_blank"> 认知升级</a>
+                                   target="_blank" th:text="${blog.type.name}"> 认知升级</a>
                             </div>
                         </div>
                     </div>
                     <div class="five wide column">
-                        <a href="#" target="_blank">
+                        <a href="#" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}">
                             <img alt="" class="ui rounded image"
-                                 src="https://picsum.photos/seed/picsum/800/450?image=1005">
+                                 src="https://picsum.photos/seed/picsum/800/450?image=1005"
+                                 style="width: 200px;height: 150px" th:src="@{${blog.firstPicture}}">
                         </a>
                     </div>
                 </div>
             </div>
         </div>
         <!--        footer-->
-        <div class="ui bottom attached segment">
+        <div class="ui bottom attached segment" th:if="${page.totalPages}>1">
             <div class="ui middle aligned two column grid">
                 <div class="column">
-                    <a class="ui mini teal basic button" href="#">上一页</a>
+                    <a class="ui mini teal basic button" href="#" th:href="@{/admin/types(page=${page.number}-1)}"
+                       th:unless="${page.first}">上一页</a>
                 </div>
                 <div class="right aligned column">
-                    <a class="ui mini teal basic button" href="#">下一页</a>
+                    <a class="ui mini teal basic button" href="#" th:href="@{/admin/types(page=${page.number}+1)}"
+                       th:unless="${page.last}">下一页</a>
                 </div>
             </div>
         </div>
