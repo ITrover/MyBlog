@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head th:replace="_fragments :: head(~{::title})">
     <meta charset="UTF-8">
     <meta content="width=device-width , initial-scale=1.0" name="viewport">
@@ -42,7 +43,7 @@
                     <h3 class="ui teal header">分类</h3>
                 </div>
                 <div class="right aligned column">
-                    共<h3 class="ui orange header m-inline-block m-text-thin" th:text="${#arrays.length(types)}">14</h3>个
+                    共<h3 class="ui orange header m-inline-block m-text-thin" th:text="${#lists.size(types)}">14</h3>个
                 </div>
             </div>
         </div>
@@ -51,7 +52,7 @@
                 <a class="ui basic  button" href="#" th:classappend="${type.id==activeTypeId} ? 'teal'"
                    th:href="@{/types/{id}(id=${type.id})}" th:text="${type.name}">思考感悟</a>
                 <div class="ui basic  left pointing label" th:classappend="${type.id==activeTypeId} ? 'teal'"
-                     th:href="@{/types/{id}(id=${type.id})}" th:text="${#arrays.length(type.blogs)}">24
+                     th:href="@{/types/{id}(id=${type.id})}" th:text="${#lists.size(type.blogs)}">24
                 </div>
             </div>
             <!--/*-->
@@ -59,7 +60,7 @@
                 <a class="ui basic  button" href="#">思考感悟</a>
                 <div class="ui basic  left pointing label">24</div>
             </div>
-            <!--/*-->
+            <!--*/-->
         </div>
         <!--            content-->
         <div class="ui top attached teal segment">

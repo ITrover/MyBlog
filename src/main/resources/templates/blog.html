@@ -13,7 +13,7 @@
 </head>
 <body>
 <!--导航-->
-<nav class="ui inverted attached segment m-padded-tb-mini">
+<nav class="ui inverted attached segment m-padded-tb-mini" th:replace="_fragments :: menu(0)">
     <div class="ui container">
         <div class="ui inverted secondary stackable menu">
             <h2 class="ui teal header item">Blog</h2>
@@ -58,16 +58,18 @@
         </div>
         <div class="ui attached segment animated fadeIn">
             <!--        图片区域-->
-            <img alt="" class="ui fluid rounded image" src="" th:src="@{${blog.firstPicture}}">
+            <img alt="" class="ui fluid rounded image" src="" style="width: 800px;height: 600px;"
+                 th:src="@{${blog.firstPicture}}">
         </div>
         <div class="ui  attached padded segment">
             <!--        内容-->
             <div class="ui right aligned basic segment">
                 <div class="ui orange basic label" th:text="${blog.flag}">原创</div>
             </div>
+
             <h2 class="ui center aligned header" th:text="${blog.title}">java入门</h2>
             <!--        正文-->
-            <div class="typo typo-selection js-toc-content m-padded-lr m-padded-tb-large" id="content"
+            <div class="typo typo-selection js-toc-content m-padded-lr m-padded-tb-large" id="content" th:inline="none"
                  th:utext="${blog.content}">
                 <!--/*-->
                 <pre><code class="language-java">System.out.println("hello world")</code></pre>
@@ -228,7 +230,6 @@
                 <!--*/-->
             </div>
 
-
             <!--        标签-->
             <div class="m-padded-lr">
                 <div class="ui basic teal basic left pointing label" th:each="tag : ${blog.tags}" th:text="${tag.name}">
@@ -244,11 +245,11 @@
                     <!--            inherit继承上级-->
                     <div class="ui images" style="font-size: inherit !important;">
                         <div class="image">
-                            <img alt="" class="ui rounded bordered image" src="" style="width: 120px" th:src="">
+                            <img alt="" class="ui rounded bordered image" src="" style="width: 120px">
                             <div>支付宝</div>
                         </div>
                         <div class="image">
-                            <img alt="" class="ui rounded bordered image" src="" style="width: 120px" th:src="">
+                            <img alt="" class="ui rounded bordered image" src="" style="width: 120px">
                             <div>微信</div>
                         </div>
                     </div>
@@ -269,7 +270,7 @@
                     </ul>
                 </div>
                 <div class="five wide column">
-                    <img alt="" class="ui right floated rounded bordered image" src="" style="width: 110px" th:src="">
+                    <img alt="" class="ui right floated rounded bordered image" src="" style="width: 110px">
                 </div>
             </div>
         </div>
@@ -299,10 +300,10 @@
                                 <div class="actions">
                                     <a class="reply" data-commentid="1" data-commentnickname="Matt"
                                        onclick="reply(this)"
-                                       th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}">Reply</a>
+                                       th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}">回复</a>
                                 </div>
                             </div>
-                            <div class="comments" th:if="${#arrays.length(comment.replyComments)}>0">
+                            <div class="comments" th:if="${#list.size(comment.replyComments)}>0">
                                 <div class="comment" th:each="reply : ${comments.replyComments}">
                                     <a class="avatar">
                                         <img src="https://picsum.photos/seed/picsum/100/100?image=1002"
@@ -332,6 +333,7 @@
 
                             </div>
                         </div>
+                        <!--/*-->
                         <div class="comment">
                             <a class="avatar">
                                 <img src="https://picsum.photos/seed/picsum/100/100?image=1002">
@@ -382,12 +384,14 @@
                                 </div>
                             </div>
                         </div>
+                        <!--*/-->
                     </div>
                 </div>
             </div>
+            <!--            留言输入区-->
             <div class="ui form">
-                <input name="blog.id" th:value="${blog.id}" type="text">
-                <input name="parentComment.id" th:value="-1" type="text">
+                <input name="blog.id" th:value="${blog.id}" type="hidden">
+                <input name="parentComment.id" th:value="-1" type="hidden">
                 <div class="field">
                     <textarea name="content" placeholder="请输入评论信息"></textarea>
                 </div>
@@ -396,7 +400,7 @@
                         <div class="ui left icon input">
                             <i class=" user icon"></i>
                             <input name="nickname" placeholder="姓名"
-                                   th:value="${session.user}!=null ? ${session.user.nickname} " type="text">
+                                   th:value="${session.user}!=null ? ${session.user.nickname}" type="text">
                         </div>
                     </div>
                     <div class="field input m-mobile-wide m-margin-bottom-tiny">
@@ -435,37 +439,7 @@
 </div>
 <!--底部footer-->
 <footer class="ui inverted vertical segment m-padded-tb-massive" th:replace="_fragments :: footer">
-    <div class="ui center aligned container">
-        <div class="ui inverted divided stackable grid">
-            <div class="three wide column">
-                <div class="item">
-                    <img src="./static/images">
-                </div>
-            </div>
-            <div class="three wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
-                <div class="ui inverted link list">
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
-                </div>
-            </div>
-            <div class="three wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
-                <div class="ui inverted link list">
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
-                </div>
-            </div>
-            <div class="three wide column">
-                <h4 class="ui inverted header m-text-thin m-text-spaced ">Blog</h4>
-                <p class="m-text-thin m-text-spaced m-opacity-mini">这是我的个人博客</p>
-            </div>
-        </div>
-        <div class="ui inverted section divider"></div>
-        <p class="m-text-thin m-text-spaced m-opacity-tiny">Copyright</p>
-    </div>
+
 </footer>
 
 <!--/*/<th:block th:replace="_fragments :: script">/*/-->
@@ -505,7 +479,7 @@
     });
     $('.ui.form').form({
         fields: {
-            title: {
+            content: {
                 identifier: 'content',
                 rules: [{
                     type: 'empty',
@@ -513,7 +487,7 @@
                 }]
             }
         },
-        content: {
+        nickname: {
             identifier: 'nickname',
             rules: [{
                 type: 'empty',
@@ -527,7 +501,7 @@
                 prompt: '标题：请输入博客分类'
             }]
         },
-        firstPicture: {
+        email: {
             identifier: 'email',
             rules: [{
                 type: 'empty',
@@ -536,9 +510,12 @@
         }
     });
 
-    $(function () {
-        $("#comment-submit").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/);
-    })
+
+    // $(function () {
+    // $("#comment-submit").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/);
+    // });
+
+
     $('#comment-submit').click(function () {
         var boo = $('.ui.form').form('validate form');
         if (boo) {
@@ -550,10 +527,10 @@
     });
 
     function postData() {
-        $("#comment-submit").load(/*[[@{/comments}]]*/"", {
+        $("#comment-container").load(/*[[@{/comments}]]*/"", {
             "parentComment.id": $("[name='parentComment.id']").val(),
             "blog.id": $("[name='blog.id']").val(),
-            "nickname": $("[name='nickname").val(),
+            "nickname": $("[name='nickname']").val(),
             "email": $("[name='email']").val(),
             "content": $("[name='content']").val()
         }, function (responseTxt, statusTxt, xhr) {
@@ -573,7 +550,7 @@
         var commentNickname = $(obj).data('commentnickname');
         $("[name='content']").attr("placeholder", "@" + commentNickname).focus();
         $("[name='parentComment.id']").val(commentId);
-        $(window).scrollTo($('#comment-form'), 500);
+        //    $(window).scrollTo($('#comment-form'), 500);
     }
 
 

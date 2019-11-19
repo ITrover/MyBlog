@@ -88,10 +88,11 @@ public class BlogServiceImpl implements BlogService {
         Blog b = new Blog();
         BeanUtils.copyProperties(blog, b);
         String content = b.getContent();
+
         //将markdown转为html
         String s = null;
         if (content != null) {
-            s = MarkdownUtil.multiMarkdown(content);
+            s = MarkdownUtil.GitHubParsingSample(content);
             b.setContent(s);
         }
         blogRepository.updateViews(id);
