@@ -29,7 +29,7 @@ public class CommentController {
         return "blog::commentList";
     }
 
-    @GetMapping("/comments")
+    @PostMapping("/comments")
     public String post(Comment comment, HttpSession session) {
         Long blogId = comment.getBlog().getId();
         comment.setBlog(blogService.getBlog(blogId));

@@ -17,6 +17,7 @@ import java.util.List;
 
 @Service
 public class TagServiceImpl implements TagService {
+
     @Autowired
     private TagRepository tagRepository;
 
@@ -58,7 +59,6 @@ public class TagServiceImpl implements TagService {
     @Transactional
     @Override
     public List<Tag> listTag(String ids) {
-
         return tagRepository.findAllById(convertToList(ids));
     }
 
@@ -84,7 +84,7 @@ public class TagServiceImpl implements TagService {
     @Transactional
     @Override
     public void deleteTag(Long id) {
-
+        tagRepository.deleteById(id);
     }
 
     @Transactional

@@ -14,9 +14,9 @@ spring:
 
 logging:
   level:
-    root: warn
+    root: error
     com.mayh.blog: info
   file:
     name: log/blog-dev.log
 server:
-  port: 8080
+  port: 8081

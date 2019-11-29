@@ -8,12 +8,11 @@ import com.mayh.blog.utils.MarkdownUtil;
 import com.mayh.blog.utils.MyBeanUtils;
 import com.mayh.blog.vo.BlogQuery;
 import org.hibernate.mapping.Join;
+import org.hibernate.mapping.Join;
+import org.hibernate.mapping.Join;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.data.domain.*;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -63,13 +62,17 @@ public class BlogServiceImpl implements BlogService {
 
     @Override
     public Page<Blog> listBlog(Long tagId, Pageable pageable) {
-        return (Page<Blog>) blogRepository.findAll(new Specification<Blog>() {
-            @Override
-            public Predicate toPredicate(Root<Blog> root, CriteriaQuery<?> criteriaQuery, CriteriaBuilder criteriaBuilder) {
-                Join join = (Join) root.join("tags");
-                return criteriaBuilder.equal((Expression<?>) join.getKey(), tagId);
-            }
-        });
+
+        return listConvertToPage(blogRepository.findAll((root, query, cb) -> {
+            return cb.equal(root.join("tags"), tagId);
+        }), pageable);
+    }
+
+    //将list转为page
+    public <T> Page<T> listConvertToPage(List<T> list, Pageable pageable) {
+        int start = (int) pageable.getOffset();
+        int end = (start + pageable.getPageSize()) > list.size() ? list.size() : (start + pageable.getPageSize());
+        return new PageImpl<T>(list.subList(start, end), pageable, list.size());
     }
 
     @Override
@@ -92,7 +95,7 @@ public class BlogServiceImpl implements BlogService {
         //将markdown转为html
         String s = null;
         if (content != null) {
-            s = MarkdownUtil.GitHubParsingSample(content);
+            s = MarkdownUtil.commonMark(content);
             b.setContent(s);
         }
         blogRepository.updateViews(id);

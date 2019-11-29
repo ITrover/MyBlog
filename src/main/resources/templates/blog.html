@@ -303,8 +303,8 @@
                                        th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}">回复</a>
                                 </div>
                             </div>
-                            <div class="comments" th:if="${#list.size(comment.replyComments)}>0">
-                                <div class="comment" th:each="reply : ${comments.replyComments}">
+                            <div class="comments" th:if="${#lists.size(comment.replyComments)}>0">
+                                <div class="comment" th:each="reply : ${comment.replyComments}">
                                     <a class="avatar">
                                         <img src="https://picsum.photos/seed/picsum/100/100?image=1002"
                                              th:src="@{${reply.avatar}}">
@@ -511,23 +511,25 @@
     });
 
 
-    // $(function () {
-    // $("#comment-submit").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/);
-    // });
+    $(function () {
+        $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"@{/comments/{id}(id=${blog.id})}");
+    });
+
 
 
     $('#comment-submit').click(function () {
-        var boo = $('.ui.form').form('validate form');
-        if (boo) {
-            console.log('校验成功');
-            postData();
-        } else {
-            console.log('校验失败');
-        }
+        alert("I doesn't finish");
+        /*        var boo = $('.ui.form').form('validate form');
+                if (boo) {
+                    console.log('校验成功');
+                    postData();
+                } else {
+                    console.log('校验失败');
+                }*/
     });
 
     function postData() {
-        $("#comment-container").load(/*[[@{/comments}]]*/"", {
+        $("#comment-container").load(/*[[@{/comments}]]*/"/comments", {
             "parentComment.id": $("[name='parentComment.id']").val(),
             "blog.id": $("[name='blog.id']").val(),
             "nickname": $("[name='nickname']").val(),
@@ -538,7 +540,6 @@
             clearContent();
         });
     }
-
     function clearContent() {
         $("[name='content']").val('');
         $("[name='parentComment.id']").val(-1);
@@ -552,8 +553,6 @@
         $("[name='parentComment.id']").val(commentId);
         //    $(window).scrollTo($('#comment-form'), 500);
     }
-
-
 
 </script>
 </body>
