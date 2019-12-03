@@ -123,7 +123,8 @@
                                 <i class="idea icon"></i>分类
                             </div>
                             <div class="right aligned column">
-                                <a href="#" target="_blank">more<i class="angle double right icon "></i></a>
+                                <a href="#" target="_blank" th:href="@{/types/-1}">more<i
+                                        class="angle double right icon "></i></a>
                             </div>
                         </div>
                     </div>
@@ -166,13 +167,14 @@
                                 <i class="tags icon"></i>标签
                             </div>
                             <div class="right aligned column">
-                                <a href="#" target="_blank">more<i class="angle double right icon "></i></a>
+                                <a href="#" target="_blank" th:href="@{/tags/-1}">more<i
+                                        class="angle double right icon "></i></a>
                             </div>
                         </div>
                     </div>
                     <div class="ui teal segment">
                         <a class="ui teal basic left pointing label m-margin-tb-tiny" href="#" target="_blank"
-                           th:each="tag : ${tags}" th:href="@{types/{id}(id=${type.id})}">
+                           th:each="tag : ${tags}" th:href="@{tags/{id}(id=${tag.id})}">
                             <span th:text="${tag.name}">方法论</span>
                             <!-- <div class="detail" th:text="${#arrays.length(tag.blogs)}">23</div>-->
                         </a>
@@ -199,14 +201,14 @@
                     </div>
                     <div class="ui segment" th:each="blog : ${recommendBlogs}">
                         <a class="m-black m-text-thin" href="#" target="_blank" th:href="@{/blog/{id}(id=${blog.id})}"
-                           th:text="${blog.title}">用户故事</a>
+                           th:text="${blog.title}">深度睡眠</a>
                     </div>
                     <!--/*-->
                     <div class="ui segment">
-                        <a class="m-black m-text-thin" href="#" target="_blank">用户故事</a>
+                        <a class="m-black m-text-thin" href="#" target="_blank">深度睡眠</a>
                     </div>
                     <div class="ui segment">
-                        <a class="m-black m-text-thin" href="#" target="_blank">用户故事</a>
+                        <a class="m-black m-text-thin" href="#" target="_blank">深度睡眠</a>
                     </div>
                     <!--*/-->
                 </div>
@@ -234,17 +236,17 @@
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
                 <div class="ui inverted link list">
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
+                    <a class="item" href="#">深度睡眠</a>
+                    <a class="item" href="#">深度睡眠</a>
+                    <a class="item" href="#">深度睡眠</a>
                 </div>
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
                 <div class="ui inverted link list">
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
+                    <a class="item" href="#">深度睡眠</a>
+                    <a class="item" href="#">深度睡眠</a>
+                    <a class="item" href="#">深度睡眠</a>
                 </div>
             </div>
             <div class="three wide column">

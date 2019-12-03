@@ -36,26 +36,19 @@
         <i class="sidebar icon"></i>
     </a>
 </nav>
-<div class="ui attached pointing menu ">
-    <div class="ui container">
-        <div class="right menu">
-            <a class="teal active item" href="#">发布</a>
-            <a class="item" href="#">列表</a>
-        </div>
-    </div>
-</div>
+
 
 
 <!--中间内容-->
 <div class="m-container-small m-padded-tb-big">
-    <div class="ui container">
+    <div class="ui container m-padded-tb-massive">
         <form action="#" class="ui form" method="post"
               th:action="*{id}==null ? @{/admin/tags}: @{/admin/tags/{id}(id=*{id})}" th:object="${tag}">
             <input name="id" th:value="*{id}" type="hidden">
             <div class="required field">
                 <div class="ui left labeled input">
                     <label class="ui teal basic label">名称</label>
-                    <input name="name" placeholder="分类名称" th:value="*{name}" type="text">
+                    <input name="name" placeholder="标签名称" th:value="*{name}" type="text">
                 </div>
             </div>
             <div class="ui error message"></div>
@@ -87,17 +80,17 @@
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced ">最新博客</h4>
                 <div class="ui inverted link list">
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
+                    <a class="item" href="#">深度睡眠</a>
+                    <a class="item" href="#">深度睡眠</a>
+                    <a class="item" href="#">深度睡眠</a>
                 </div>
             </div>
             <div class="three wide column">
                 <h4 class="ui inverted header m-text-thin m-text-spaced ">联系我</h4>
                 <div class="ui inverted link list">
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
-                    <a class="item" href="#">用户故事</a>
+                    <a class="item" href="#">深度睡眠</a>
+                    <a class="item" href="#">深度睡眠</a>
+                    <a class="item" href="#">深度睡眠</a>
                 </div>
             </div>
             <div class="three wide column">

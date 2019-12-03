@@ -24,7 +24,7 @@ public class TagShowController {
     @Autowired
     private BlogService blogService;
 
-    @GetMapping("/tags{id}")
+    @GetMapping("/tags/{id}")
     public String types(@PageableDefault(size = 10, sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable,
                         @PathVariable Long id, Model model) {
         List<Tag> tags = tagService.listTagTop(10000);
