@@ -1,6 +1,7 @@
 HELP.md
 !**/src/main/**
 
+
 ### STS ###
 .apt_generated
 .classpath
@@ -26,3 +27,5 @@ build/
 
 ### VS Code ###
 .vscode/
+/target
+/log
