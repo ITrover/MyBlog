@@ -2,7 +2,7 @@
 我的个人博客
 
 # 我的网址
-http://120.93.24.68
+http://120.24.93.68
 
 # 开发框架
 后端springboot+jpa+thymeleaf
