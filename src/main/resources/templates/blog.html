@@ -281,28 +281,31 @@
                     <div class="ui threaded comments" style="max-width: 100%;">
                         <h3 class="ui dividing header">评论</h3>
                         <div class="comment" th:each="comment : ${comments}">
-                            <a class="avatar">
-                                <img src="https://picsum.photos/seed/picsum/100/100?image=1002"
-                                     th:src="@{${comment.avatar}}">
-                            </a>
-                            <div class="content">
-                                <a class="author">
-                                    <span th:text="${comment.nickname}"> Matt</span>
-                                    <div class="ui mini basic teal left pointing label m-padded-mini"
-                                         th:if="${comment.adminComment}">博主
-                                    </div>
+                            <div th:if="${comment.parentComment}==null ">
+                                <a class="avatar">
+                                    <img src="https://picsum.photos/seed/picsum/100/100?image=1002"
+                                         th:src="@{${comment.avatar}}">
                                 </a>
-                                <div class="metadata">
+                                <div class="content">
+                                    <a class="author">
+                                        <span th:text="${comment.nickname}"> Matt</span>
+                                        <div class="ui mini basic teal left pointing label m-padded-mini"
+                                             th:if="${comment.adminComment}">博主
+                                        </div>
+                                    </a>
+                                    <div class="metadata">
                                     <span class="date"
                                           th:text="${#dates.format(comment.createTime,'yyyy-MM-dd HH:mm')}">今天下午 5:42</span>
-                                </div>
-                                <div class="text" th:text="${comment.content}">太赞了！</div>
-                                <div class="actions">
-                                    <a class="reply" data-commentid="1" data-commentnickname="Matt"
-                                       onclick="reply(this)"
-                                       th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}">回复</a>
+                                    </div>
+                                    <div class="text" th:text="${comment.content}">太赞了！</div>
+                                    <div class="actions">
+                                        <a class="reply" data-commentid="1" data-commentnickname="Matt"
+                                           onclick="reply(this)"
+                                           th:attr="data-commentid=${comment.id},data-commentnickname=${comment.nickname}">回复</a>
+                                    </div>
                                 </div>
                             </div>
+
                             <div class="comments" th:if="${#lists.size(comment.replyComments)}>0">
                                 <div class="comment" th:each="reply : ${comment.replyComments}">
                                     <a class="avatar">
@@ -389,7 +392,7 @@
                 </div>
             </div>
             <!--            留言输入区-->
-            <div class="ui form">
+            <div class="ui form  ">
                 <input name="blog.id" th:value="${blog.id}" type="hidden">
                 <input name="parentComment.id" th:value="-1" type="hidden">
                 <div class="field">
@@ -416,8 +419,10 @@
                         </button>
                     </div>
                 </div>
+                <div class="ui error message"></div>
             </div>
         </div>
+
     </div>
 </div>
 <!--右边目录条-->
@@ -485,51 +490,51 @@
                     type: 'empty',
                     prompt: '请输入评论内容'
                 }]
+            },
+            nickname: {
+                identifier: 'nickname',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请输入你的大名'
+                }]
+            },
+            typeId: {
+                identifier: 'typeId',
+                rules: [{
+                    type: 'empty',
+                    prompt: '标题：请输入博客分类'
+                }]
+            },
+            email: {
+                identifier: 'email',
+                rules: [{
+                    type: 'empty',
+                    prompt: '请填写正确的邮箱地址'
+                }]
             }
-        },
-        nickname: {
-            identifier: 'nickname',
-            rules: [{
-                type: 'empty',
-                prompt: '请输入你的大名'
-            }]
-        },
-        typeId: {
-            identifier: 'typeId',
-            rules: [{
-                type: 'empty',
-                prompt: '标题：请输入博客分类'
-            }]
-        },
-        email: {
-            identifier: 'email',
-            rules: [{
-                type: 'empty',
-                prompt: '请填写正确的邮箱地址'
-            }]
         }
     });
 
 
     $(function () {
-        $("#comment-container").load(/*[[@{/comments/{id}(id=${blog.id})}]]*/"@{/comments/{id}(id=${blog.id})}");
+        //@{/order/{orderId}/details(orderId=${o.id})}
+        $("#comment-container").load("[[@{/comments/{id}(id=${blog.id})}]]");
     });
 
 
 
     $('#comment-submit').click(function () {
-        alert("I doesn't finish");
-        /*        var boo = $('.ui.form').form('validate form');
+        var boo = $('.ui.form').form('validate form');
                 if (boo) {
                     console.log('校验成功');
                     postData();
                 } else {
                     console.log('校验失败');
-                }*/
+                }
     });
 
     function postData() {
-        $("#comment-container").load(/*[[@{/comments}]]*/"/comments", {
+        $("#comment-container").load("[[@{/comments}]]", {
             "parentComment.id": $("[name='parentComment.id']").val(),
             "blog.id": $("[name='blog.id']").val(),
             "nickname": $("[name='nickname']").val(),

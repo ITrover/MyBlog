@@ -1,15 +1,27 @@
 package com.mayh.blog;
 
 
+import com.mayh.blog.po.Comment;
+import com.mayh.blog.service.CommentService;
+import com.mayh.blog.service.CommentServiceImpl;
 import com.mayh.blog.utils.MarkdownUtil;
 import com.mayh.blog.utils.TitleExtract;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.junit4.SpringRunner;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+import javax.swing.*;
+import java.util.List;
+
+@SpringBootTest
 public class UnitTest {
+
+    @Autowired
+    private CommentService commentService;
+
     @Test
     public void test() {
 
@@ -39,4 +51,8 @@ public class UnitTest {
 
     }
 
+    @Test
+    public void CommentMethod() {
+
+    }
 }

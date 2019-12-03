@@ -29,4 +29,7 @@ public interface BlogRepository extends JpaRepository<Blog, Long>, JpaSpecificat
 
     @Query("select b from Blog b where function('date_format',b.updateTime,'%Y') = ?1")
     List<Blog> findByYear(String year);
+
+    @Query("select b from Blog b where b.published = true")
+    Page<Blog> findAllPublish(Pageable pageable);
 }

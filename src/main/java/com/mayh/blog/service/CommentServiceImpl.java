@@ -24,7 +24,7 @@ public class CommentServiceImpl implements CommentService {
     public List<Comment> listCommentByBlogId(Long blogId) {
         Sort sort = Sort.by(Sort.Direction.ASC, "createTime");
         List<Comment> comments = repository.findByBlogIdAndParentCommentNull(blogId, sort);
-        return eachComment(comments);
+        return SortOutComment(comments);
     }
 
     @Transactional
@@ -86,4 +86,19 @@ public class CommentServiceImpl implements CommentService {
         }
     }
 
+    /**
+     * @param comments
+     * @return
+     */
+    private List<Comment> SortOutComment(List<Comment> comments) {
+        List returnComment = new ArrayList();
+        for (Comment comment : comments
+        ) {
+            returnComment.add(comment);
+            if (comment.getReplyComments() != null) {
+                returnComment.addAll(SortOutComment(comment.getReplyComments()));
+            }
+        }
+        return returnComment;
+    }
 }

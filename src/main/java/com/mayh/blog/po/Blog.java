@@ -36,6 +36,7 @@ public class Blog {
     @ManyToOne
     private Type type;
 
+
     //不会进入数据库
     @Transient
     private String tagIds;
@@ -195,9 +196,10 @@ public class Blog {
         return tagIds;
     }
 
-    public void setTagIdS(String tagIdS) {
-        this.tagIds = tagIdS;
+    public void setTagIds(String tagIds) {
+        this.tagIds = tagIds;
     }
+
 
     public Boolean getRecommend() {
         return recommend;

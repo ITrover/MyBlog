@@ -56,8 +56,7 @@ public class BlogServiceImpl implements BlogService {
     @Transactional
     @Override
     public Page<Blog> listBlog(Pageable pageable) {
-
-        return blogRepository.findAll(pageable);
+        return blogRepository.findAllPublish(pageable);
     }
 
     @Override
